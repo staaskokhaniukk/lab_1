@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Усунення дублікатів дат</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Форма для вводу товарів і дат постачання:</h2>
+    <form id="dataForm">
+        <input type="text" id="productName" placeholder="Назва товару">
+        <input type="text" id="supplyDate" placeholder="Дата постачання (р-м-д)">
+        <button type="button" onclick="addData()">Додати</button>
+    </form>
+
+    <h2>Унікальні товари та дати постачання:</h2>
+    <ul id="uniqueData"></ul>
+
+    <script>
+        function addData() {
+            var productName = document.getElementById('productName').value;
+            var supplyDate = document.getElementById('supplyDate').value;
+            var listItem = productName + ' - ' + supplyDate;
+            
+            if (!document.getElementById('uniqueData').innerHTML.includes(listItem)) {
+                var li = document.createElement('li');
+                li.textContent = listItem;
+                document.getElementById('uniqueData').appendChild(li);
+            } else {
+                alert('Цей товар і дата постачання вже додані.');
+            }
+
+            document.getElementById('productName').value = '';
+            document.getElementById('supplyDate').value = '';
+        }
+    </script>
+</body>
+</html>

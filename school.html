@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Найбільше за сумою цифр</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="bart.png" alt="Лого">
+    </div>
+
+    <div class="container">
+        <h2>Введіть натуральні числа (через кому):</h2>
+        <input type="text" id="numbersInput">
+        <br>
+        <button onclick="findMaxSum()">Знайти найбільше</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function findMaxSum() {
+            var numbers = document.getElementById('numbersInput').value.split(',').map(Number);
+            var maxSum = 0;
+            var numberWithMaxSum = 0;
+
+            for (var i = 0; i < numbers.length; i++) {
+                var currentNumber = numbers[i];
+                var sum = 0;
+
+                while (currentNumber > 0) {
+                    sum += currentNumber % 10;
+                    currentNumber = Math.floor(currentNumber / 10);
+                }
+
+                if (sum > maxSum) {
+                    maxSum = sum;
+                    numberWithMaxSum = numbers[i];
+                }
+            }
+
+            document.getElementById('result').innerHTML = "<p>Число з найбільшою сумою цифр: " + numberWithMaxSum + "</p><p>Сума його цифр: " + maxSum + "</p>";
+        }
+    </script>
+</body>
+</html>
